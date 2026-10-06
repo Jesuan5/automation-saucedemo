@@ -11,6 +11,11 @@ Proyecto de automatizacion de pruebas realizado con python para curso de Talemto
 
 ## Instalacion
 
+
+    ``` python
+    pip install selenium
+    ```
+
     ``` python
     pip install pytest
     ```
