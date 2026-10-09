@@ -2,21 +2,35 @@ import pytest
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+
 def test_login_exitoso():
     driver= webdriver.Chrome()
     
     try:
         driver.get("https://www.saucedemo.com/")
         
+        driver.implicitly_wait(10)
+
+        wait = WebDriverWait(driver,10)
         
-         # Localizar elementos
-        usuario = driver.find_element(By.ID,"user-name")
-        password = driver.find_element(By.ID,"password")
-        boton_login = driver.find_element(By.ID,"login-button")
         
-         # Comppletar el formulario
+        # Localizar elementos
+        usuario = wait.until(EC.presence_of_element_located((By.ID,"user-name")))
+        #driver.find_element(By.ID,"user-name")
+        password = wait.until(EC.presence_of_element_located((By.ID,"password")))
+        #driver.find_element(By.ID,"password")
+        
+        
+        boton_login = wait.until(EC.element_to_be_clickable((By.ID,"login-button")))
+        
+        # driver.find_element(By.ID,"login-button")
+        
+        # Comppletar el formulario
         usuario.send_keys("standard_user")
         password.send_keys("secret_sauce")
+
 
         #Hacer Login
         boton_login.click()
